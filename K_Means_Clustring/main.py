@@ -6,31 +6,30 @@ def k_means_clustring(allPixels):
 
     # cluster number
     K = int(argv[1])
+
     # Representatives Intioialization
     choices = np.random.choice(range(len(allPixels)), size=K, replace=False)
     Z = [allPixels[matrix] for matrix in choices]
+
     # Clusters Intioialization
-    G = [[] for _ in range(K)]
-    G = choose_cluster(allPixels, K, Z, G)
+    G = choose_cluster(allPixels, K, Z)
+
     # Z = choose_represenative(Z, G)
     # flag = j_cluster(Z, G)
 
 
-def choose_cluster(allPixels, K, Z, G):
+def choose_cluster(allPixels, K, Z):
     # Clear Clusters Collection
     G = [[] for _ in range(K)]
     number_cropped_image = len(allPixels)
+
     for i in range(number_cropped_image):
-        min_distance = 0
+        min_distance = np.linalg.norm(allPixels[i] - Z[0])
         min_index = 0
+
         for j in range(K):
             # distance calculater
-            if(j == 0):
-                min_distance = np.linalg.norm(allPixels[i] - Z[j])
-                distance = min_distance
-
-            else:
-                distance = np.linalg.norm(allPixels[i] - Z[j])
+            distance = np.linalg.norm(allPixels[i] - Z[j])
 
             # best cluster
             if(distance < min_distance):
