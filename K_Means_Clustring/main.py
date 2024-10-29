@@ -20,25 +20,30 @@ for picture in range(5):
             # crop image pixels 16 * 16
             crop_area = (x * 16, y * 16,(x + 1) * 16,(y + 1) * 16)
             cropped_image = image.crop(crop_area)
-            cropped_image.save("D://University//Term 7//Linear Algebra//Project//k-means-clustring//DataSet//Cropped_Image//usps_cropped_" + str(picture + 1) + "_" + str(x) + "_" + str(y) + ".jpg")
+            # cropped_image.save("D://University//Term 7//Linear Algebra//Project//k-means-clustring//DataSet//Cropped_Image//usps_cropped_" + str(picture + 1) + "_" + str(x) + "_" + str(y) + ".jpg")
             # 16 * 16 convert 256 * 1
             pixel = np.array(cropped_image)
             shape = np.reshape(pixel, (256, 1))
             allPixels.append(shape)
 
-# def k_means_clustring(allPixels):
-#     # cluster number
-#     k = int(argv[1])
-#     # Representatives Intioialization
-#     Z = [np.random.sample(allPixels, k)]
-#     # Clusters Intioialization
-#     G = [[None]] * k
+def k_means_clustring():
+    # cluster number
+    k = int(argv[1])
+    # Representatives Intioialization
+    Z = [np.random.sample(allPixels, k)]
+    # Clusters Intioialization
+    G = [[None]] * k
+
+    Z = choose_cluster(Z, G)
+    G = choose_represenative(Z, G)
+    flag = j_cluster(Z, G)
 
 
-# def choose_cluster(Z, G):
+def choose_cluster(Z, G):
+    pass
 
+def choose_represenative(Z, G):
+    pass
 
-# def choose_represenative():
-#
-#
-# def j_cluster():
+def j_cluster(Z, G):
+    pass
