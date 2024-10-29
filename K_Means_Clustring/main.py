@@ -11,15 +11,14 @@ def k_means_clustring(allPixels):
     choices = np.random.choice(range(len(allPixels)), size=K, replace=False)
     Z = [allPixels[matrix] for matrix in choices]
 
-    # Clusters Intioialization
-    G = choose_cluster(allPixels, K, Z)
+    for _ in range(100):
+        # Clusters Intioialization
+        G = choose_cluster(allPixels, K, Z)
 
-    # Representation Intioialization
-    Z = choose_representative(allPixels, K, G)
+        # Representation Intioialization
+        Z = choose_representative(allPixels, K, G)
 
-    print(Z)
-
-    # flag = j_cluster(Z, G)
+    return Z
 
 
 def choose_cluster(allPixels, K, Z):
@@ -58,9 +57,6 @@ def choose_representative(allPixels, K, G):
 
     return Z
 
-def j_cluster(Z, G):
-    pass
-
 def main():
     # All pixels cropped image
     allPixels = []
@@ -78,13 +74,14 @@ def main():
                 # crop image pixels 16 * 16
                 crop_area = (x * 16, y * 16,(x + 1) * 16,(y + 1) * 16)
                 cropped_image = image.crop(crop_area)
-                # cropped_image.save("D://University//Term 7//Linear Algebra//Project//k-means-clustring//DataSet//Cropped_Image//usps_cropped_" + str(picture + 1) + "_" + str(x) + "_" + str(y) + ".jpg")
+                cropped_image.save("D://University//Term 7//Linear Algebra//Project//k-means-clustring//DataSet//Cropped_Image//usps_cropped_" + str(picture + 1) + "_" + str(x) + "_" + str(y) + ".jpg")
                 # 16 * 16 convert 256 * 1
                 pixel = np.array(cropped_image)
                 shape = np.reshape(pixel, (256, 1))
                 allPixels.append(shape)
 
-    k_means_clustring(allPixels)
+    representative = k_means_clustring(allPixels)
+    print(representative)
 
 if __name__ == "__main__":
     main()
