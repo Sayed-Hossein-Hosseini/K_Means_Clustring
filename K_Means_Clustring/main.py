@@ -14,7 +14,11 @@ def k_means_clustring(allPixels):
     # Clusters Intioialization
     G = choose_cluster(allPixels, K, Z)
 
-    # Z = choose_represenative(Z, G)
+    # Representation Intioialization
+    Z = choose_representative(allPixels, K, G)
+
+    print(Z)
+
     # flag = j_cluster(Z, G)
 
 
@@ -36,14 +40,25 @@ def choose_cluster(allPixels, K, Z):
                 min_distance = distance
                 min_index = j
 
-        G[min_index].append(allPixels[i])
+        G[min_index].append(i)
 
     return G
 
-def j_cluster(Z, G):
-    pass
+def choose_representative(allPixels, K, G):
+    #Clear Repsentative Collection
+    Z = []
 
-def choose_represenative(Z, G):
+    for i in range(K):
+        avrage = np.zeros((256, 1))
+        for j in G[i]:
+            avrage += allPixels[j]
+
+        avrage /= len(G[i])
+        Z.append(avrage)
+
+    return Z
+
+def j_cluster(Z, G):
     pass
 
 def main():
