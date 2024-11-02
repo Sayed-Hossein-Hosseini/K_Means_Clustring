@@ -2,26 +2,25 @@ from sys import argv
 import numpy as np
 from PIL import Image
 
+def initialize_centroids(allPixels):
+    choices = np.random.choice(range(len(allPixels)), size=K, replace=False)
+    return [matrix for matrix in choices]
+
 def k_means_clustring(allPixels):
 
     # cluster number
     K = int(argv[1])
 
-    # Representatives Intioialization
-    choices = np.random.choice(range(len(allPixels)), size=K, replace=False)
-    Z = [allPixels[matrix] for matrix in choices]
+    Z = initialize_centroids(allPixels)
 
     for _ in range(100):
-        # Clusters Intioialization
-        G = choose_cluster(allPixels, K, Z)
+        G = update_cluster(allPixels, K, Z)
+        Z = update_centroids(allPixels, K, G)
 
-        # Representation Intioialization
-        Z = choose_representative(allPixels, K, G)
-
-    return Z
+    return Z, G
 
 
-def choose_cluster(allPixels, K, Z):
+def update_cluster(allPixels, K, Z):
     # Clear Clusters Collection
     G = [[] for _ in range(K)]
     number_cropped_image = len(allPixels)
@@ -43,8 +42,8 @@ def choose_cluster(allPixels, K, Z):
 
     return G
 
-def choose_representative(allPixels, K, G):
-    #Clear Repsentative Collection
+def update_centroids(allPixels, K, G):
+    #Clear centroids Collection
     Z = []
 
     for i in range(K):
