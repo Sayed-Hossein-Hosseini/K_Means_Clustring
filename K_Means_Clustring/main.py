@@ -26,17 +26,19 @@ def update_cluster(allPixels, K, Z):
     number_cropped_image = len(allPixels)
 
     for i in range(number_cropped_image):
-        min_distance = np.linalg.norm(allPixels[i] - Z[0])
+        min_distance = int(1e100)
         min_index = 0
 
         for j in range(K):
-            # distance calculater
-            distance = np.linalg.norm(allPixels[i] - Z[j])
 
-            # best cluster
-            if(distance < min_distance):
-                min_distance = distance
-                min_index = j
+            if j not in Z:
+                # distance calculater
+                distance = np.linalg.norm(allPixels[i] - allPixels[Z[j]])
+
+                # best cluster
+                if(distance < min_distance and j not in Z):
+                    min_distance = distance
+                    min_index = j
 
         G[min_index].append(i)
 
