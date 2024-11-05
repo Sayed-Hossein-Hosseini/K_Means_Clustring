@@ -3,6 +3,7 @@ from sys import argv
 import kagglehub
 import numpy as np
 from PIL import Image
+import csv
 
 
 def download_Fashion_MNIST_Dataset():
@@ -60,7 +61,7 @@ def update_centroids(allPixels, K, G):
     Z = [k for k in range(K)]
 
     for i in range(K):
-        average = np.zeros((256, 1))
+        average = np.zeros((784, 1)) # MNIST -> (256, 1) , Fashion MNIST -> (784, 1)
         for j in G[i]:
             average += allPixels[j]
 
@@ -120,6 +121,52 @@ def main_MNIST():
                 f"D:\\University\\Term 7\\Linear Algebra\\Project\\k-means-clustring\\Hossein\\MNIST\\K = {len(Z)}\\Clusters\\{i + 1}\\cluster_{j + 1}.jpg")
             image.show()
 
+def main_Fashion_MNIST():
+    # Upload Fashion MNIST Dataset
+    allPixels = []
+
+    filename = "D:\\University\\Term 7\\Linear Algebra\\Project\\K_Means_Clustring\\Dataset\\Fashion MNIST\\fashion-mnist.csv"
+
+    with open(filename, 'r') as file:
+        csv_reader = csv.reader(file)
+        counter = 0
+
+        for row in csv_reader:
+            if counter != 0:
+
+                pixel = np.array(row[1:]).astype(int)
+                shape = np.reshape(pixel, (784, 1))
+
+                if not np.equal(np.linalg.norm(shape), 0):
+                    allPixels.append(shape)
+
+            counter += 1
+
+    Z, G = k_means_clustring(allPixels)
+
+    for i in range(len(Z)):
+        centroid = Z[i]
+        centroid_matrix = centroid.reshape((28, 28))
+        image_data = np.uint8(centroid_matrix)
+
+        image = Image.fromarray(image_data)
+
+        image.save(
+            f"D:\\University\\Term 7\\Linear Algebra\\Project\\K_Means_Clustring\\Hossein\\Fashion MNIST\\K = {len(Z)}\\Centroids\\centroid_{i + 1}.jpg")
+        image.show()
+
+        for j in range(len(G[i])):
+            element = allPixels[G[i][j]]
+            element_matrix = element.reshape((28, 28))
+            image_data = np.uint8(element_matrix)
+
+            image = Image.fromarray(image_data)
+
+            image.save(
+                f"D:\\University\\Term 7\\Linear Algebra\\Project\\K_Means_Clustring\\Hossein\\Fashion MNIST\\K = {len(Z)}\\Clusters\\{i + 1}\\cluster_{j + 1}.jpg")
+            image.show()
+
 
 if __name__ == "__main__":
-    main_MNIST()
+    # main_MNIST()
+    main_Fashion_MNIST()
