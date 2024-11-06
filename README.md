@@ -17,7 +17,7 @@ The **K-Means clustering algorithm** is based on iterative optimization to form 
 
 In this implementation, we use the following parameters:
 
-- **`K` (Number of Clusters)**: This is the number of clusters or groups that we want to create. In this project, we set `K = 10`, as both MNIST and Fashion MNIST datasets contain 10 categories.
+- **`K` (Number of Clusters)**: This is the number of clusters or groups we want to create. In this project, we set `K` as desired to check all kinds of situations, in such a way that for the <b>MNIST</b> dataset, we set the value of `K` to `3`, `4`, `5`, `6`, and `7`, and for <b>Fashion MNIST</b>, due to the long processing time, we set the same number of main categories as `10`. 
   
 - **`allPixel` (Data Points)**: This is the dataset containing all pixel values of the images. Each image is flattened into a vector, representing each pixel as a feature, so `allPixel` becomes a collection of vectors (data points) for clustering.
 
@@ -52,16 +52,17 @@ The Fashion MNIST dataset includes grayscale images of various clothing items (e
 ## Project Structure
 
 - **main.py**: The main Python script that loads the dataset, applies K-Means clustering, and displays the results.
-- **fash2.jpg**: Sample visualization of Fashion MNIST dataset.
-- **usps_5.jpg**: Sample visualization of handwritten digits from a subset of MNIST.
+- **Dataset Directory**: MNIST and Fashion MNIST datasets are located in it for processing.
+- **Hossein Directory**: The data after processing are datasets, which include representatives of the clusters as well as the values ​​assigned to each cluster.
 
 ## Requirements
 
-- Python 3.x
-- NumPy
-- Scikit-learn
-- Matplotlib
-- TensorFlow/Keras (for loading datasets)
+- Python Language
+- kagglehub (For downloading datasets)
+- Numpy (For work with arrays)
+- Pillow (For process images)
+- sys (For work with the terminal)
+- csv (For work with the Dataset)
 
 You can install the required libraries with the following command:
 
