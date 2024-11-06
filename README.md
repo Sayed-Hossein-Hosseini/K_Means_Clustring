@@ -35,6 +35,14 @@ In this implementation, we use the following parameters:
    - For each cluster in `G`, recalculate the representative `Z` by averaging the points within that cluster.
 4. **Convergence Check**: Repeat the steps above until the representatives in `Z` do not change significantly or until a maximum number of iterations is reached.
 
+### Algorithm Execution Instructions
+
+To run the algorithm, write the following command in the terminal and set a value according to your liking for the number of clusters:<br>
+(K is the number of cluster)
+```bash
+python main.py K
+```
+
 ## Datasets
 
 ### MNIST Dataset
@@ -51,7 +59,7 @@ The Fashion MNIST dataset includes grayscale images of various clothing items (e
 
 ## Project Structure
 
-- **main.py**: The main Python script that loads the dataset, applies K-Means clustering, and displays the results.
+- **K_Means_Clustring Directory**: The main Python script that loads the dataset, applies K-Means clustering, and displays the results.
 - **Dataset Directory**: MNIST and Fashion MNIST datasets are located in it for processing.
 - **Hossein Directory**: The data after processing are datasets, which include representatives of the clusters as well as the values ​​assigned to each cluster.
 
@@ -67,4 +75,13 @@ The Fashion MNIST dataset includes grayscale images of various clothing items (e
 You can install the required libraries with the following command:
 
 ```bash
-pip install -r requirements.txt
+pip install library-name
+```
+
+## Authors
+
+- Sayyed Hossein Hosseini Dolat Abadi
+
+## License
+
+This project is licensed under the MIT License.
